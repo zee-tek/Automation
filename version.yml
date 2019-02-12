@@ -1,0 +1,13 @@
+---
+- hosts: all
+  
+  tasks: 
+    - name: Check if rpm is already installed
+      yum:
+        list: subscription-manager.x86_64
+      register: is_installed
+
+    - name: install subscription-manager if not exist
+      yum:
+        name: subscription-manager.x86_64
+        state: latest
