@@ -1,6 +1,6 @@
 #!/bin/bash
-
-i=10
+echo "Your Time starts now"
+i=$1
 until [ $i -eq 0 ]
 do
 echo "$i sec"
