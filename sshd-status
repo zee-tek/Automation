@@ -1,0 +1,20 @@
+---
+- hosts: all
+  
+
+  tasks:
+    - name: check sshd service
+      shell: ps -ef |grep -i sshd|grep -v grep
+      changed_when: False
+      register: sshd_status
+
+  
+    - name: sshd status
+      fail:
+        msg:  Service sshd is not running.
+      when: sshd_status.rc != 0
+    
+    - name: sshd status
+      debug:
+        msg: Service sshd is running.
+      when: sshd_status.rc == 0
