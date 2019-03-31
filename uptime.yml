@@ -1,6 +1,7 @@
 ---
 - hosts: all
-  
+  gather_facts: no
+  ignore_errors: yes
 
   tasks:
     - name: get hostname
