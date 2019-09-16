@@ -1,6 +1,7 @@
 ---
 - hosts: all
-  become: yes
+  remote_user: user
+  become: true
   gather_facts: no
   ignore_errors: yes
 
