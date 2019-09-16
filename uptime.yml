@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  ansible_become: yes
   gather_facts: no
   ignore_errors: yes
 
