@@ -1,10 +1,9 @@
 ---
 - hosts: all
-  setup:
-    gather_subset:
-      - '!all'
-      - '!any'
-      - facter
+  gather_subset:
+    - '!all'
+    - '!any'
+    - facter
   
   tasks: 
     - name: Check if rpm is already installed
