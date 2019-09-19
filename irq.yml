@@ -8,6 +8,6 @@
 #    filename: "{{ file }}"
   tasks:
     - name:   
-      lineinfile: dest=/etc/yum.conf line="excliude=irqbalance*,man-pages" state="{{ state }}" backup=True
+      lineinfile: dest=/etc/yum.conf line="exclude=irqbalance*,man-pages" state="{{ state }}" backup=True
 #    - name:
 #      lineinfile: dest="{{ filename }}" line="exclude=irqbalance*,man-pages" state="{{ state }}" backup=True
