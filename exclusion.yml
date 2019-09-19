@@ -1,0 +1,8 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  remote_user: user
+  tasks:
+    - name: Add and remove contents
+      lininfile: dest=/etc/yum.conf line="exclude=irqbalance,man-pages" state="{{ state }}" backup=True
