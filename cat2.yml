@@ -1,0 +1,15 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  remote_user: user
+  tasks:
+#    - name: check file
+#      debug: msg="the value of foo.txt is {{lookup('file', 'index.html') }}"
+
+    - name: display multiple files contents
+      debug: var=item
+      with_file:
+#        - "/var/www/html/index.html"
+        - "all.yml"  # will be looked in files/ dir relative to play or in role
+#        - "/path/to/biz.txt"

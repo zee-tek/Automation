@@ -1,0 +1,27 @@
+---
+- hosts: hostslist
+  gather_facts: True
+  remote_user: user
+  tasks:
+    - name: Ensure Apache is latest version
+      yum:
+        name: httpd
+        state: latest
+      become: true
+      notify: restart apache
+# <start service and enable on boot with service command>
+#  handlers:
+#    - name: restart apache
+#      become: true
+#      service:
+#        name: httpd
+#        enabled: yes
+#        state: started
+# <start service and enable it using systemd>      
+  handlers:
+    - name: restart apache
+      become: true
+      systemd:
+        name: httpd
+        enabled: yes
+        state: started  

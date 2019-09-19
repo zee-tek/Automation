@@ -1,0 +1,29 @@
+---
+- hosts:
+   - hostslist
+  become: yes
+  gather_facts: no
+  ignore_errors: yes
+
+  tasks:
+    - name: get hostname
+      shell: /bin/hostname
+      changed_when: False
+      register: hostname
+
+    - name: get uptime
+      shell: /usr/bin/uptime | grep -ohe 'up .*' | sed 's/,//g' | awk '{ print $2" "$3 }'
+      changed_when: False
+      register: uptime
+
+    - name: obtain OS version
+      shell: cat /etc/redhat-release
+      register: os_release
+
+
+    - debug: var={{ item }}
+      with_items:
+        - hostname.stdout
+        - uptime.stdout
+        - os_release.stdout
+...

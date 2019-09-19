@@ -1,0 +1,35 @@
+---
+
+- hosts: localhost
+  gather_facts: True
+  become: true
+  vars_files:
+  remote_user: user
+    - all.yml
+  tasks:
+
+    - name: Install Apache webserver or ensure latest version
+      yum: name={{ item }} state=latest
+      become: true
+      with_items:
+        - httpd
+    - name: port
+      lineinfile: dest=/etc/httpd/conf/httpd.conf regexp="^Listen 80" line="Listen 8081" state=present
+  handlers:
+    - name: restart apache
+      service: name=httpd state=restarted
+
+    - name: Ensure HTTPD is running
+      service:
+        name=httpd
+        state=started
+      become: true
+
+    - name: Push new content to webserver
+      copy:
+        src=/home/user/ansible_basic/index.html
+        dest=/var/www/html
+        owner=apache
+        group=apache
+      become: true
+      notify: restart apache

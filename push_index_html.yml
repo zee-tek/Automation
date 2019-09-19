@@ -1,0 +1,20 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  remote_user: user
+  tasks:
+    - name: push index.html file
+      copy:
+        src=index.html
+        dest=/var/www/html/
+        owner=apache
+        group=apache
+      notify: restart httpd
+  handlers:
+    - name: restart httpd
+      become: true
+      systemd:
+        name: httpd
+        enabled: yes
+        state: started

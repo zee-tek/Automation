@@ -1,0 +1,8 @@
+[hostslist]
+#awx ansible_user=user
+#rhcsa1 ansible_user=user
+#rhcsa2 ansible_user=user
+#192.168.1.185
+#rhcsa1
+rhcsa2
+rhcsa1

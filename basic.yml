@@ -1,0 +1,38 @@
+---
+- hosts: hostslist
+  gather_facts: false
+#  become: yes
+  remote_user: user
+  vars_files: 
+     - all.yml
+  tasks:
+   - name: Import EPEL GPG Key
+     rpm_key: key=https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+       state=present
+#     become: true
+   - name: Check for EPEL repo
+     yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#     become: true
+   - name: Instal Package Dependencies
+#< first method to install packages >
+#     yum: name={{ item }} state={{ state }}
+#     become: true
+#     with_items:
+#      - screen
+#      - htop
+#< Second and new method to install packages >      
+#     package:
+#       name:
+#        - screen
+#        - htop
+#       state: "{{ state }}"
+
+#< same above method with yum instead of package >
+     yum:
+       name:
+        - screen
+        - htop
+       state: "{{ state }}"
+
+ 
+...

@@ -1,0 +1,8 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  remote_user: user
+  tasks:
+    - name: see content
+      debug: msg="the value of index.html is {{lookup('file','index.html') }}"

@@ -1,0 +1,9 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  remote_user: user
+  tasks:
+    - name: add content into a file
+      lineinfile: dest=index.html line="<p>this is after hi</p>" insertafter="<p>Hi</p>" state=present
+     

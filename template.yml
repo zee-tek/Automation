@@ -1,0 +1,21 @@
+--- 
+#static content from jinja template
+- hosts: localhost
+  gather_facts: False
+  remote_user: user
+  tasks:
+    - name: Capture the current date from the date command
+      command: "date"
+      register: today_date
+
+    - name: Capture today's date for web content page
+      set_fact:
+        current_time: "{{today_date.stdout}}"
+
+    - name: Push new content to webserver
+      template:
+        src=index.html.j2
+        dest=/var/www/html/index.html
+        owner=apache
+        group=apache
+      become: yes
